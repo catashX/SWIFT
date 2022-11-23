@@ -68,6 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="adminPage.aspx" />
+    <Content Include="app_data\swiftDB-shared.mdf" />
+    <Content Include="app_data\swiftDB-shared_log.ldf">
+      <DependentUpon>swiftDB-shared.mdf</DependentUpon>
+    </Content>
     <Content Include="bootstrap\css\bootstrap-grid.css" />
     <Content Include="bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="bootstrap\css\bootstrap-reboot.css" />
