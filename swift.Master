@@ -55,7 +55,10 @@
                   </ul>
                   <ul class="navbar-nav">
                      <li class="nav-item active">
-                        <asp:LinkButton class="nav-link" ID="viewCourseButton" runat="server" Visible="false">View Course</asp:LinkButton>
+                        <asp:LinkButton class="nav-link" ID="viewCourseButton" runat="server" Visible="false">course list</asp:LinkButton>
+                     </li>
+                      <li class="nav-item active">
+                        <asp:LinkButton class="nav-link" ID="tutorList" runat="server" Visible="false">tutor list</asp:LinkButton>
                      </li>
                      <li class="nav-item active">
                         <asp:LinkButton class="nav-link" ID="login" runat="server">User Login</asp:LinkButton>
@@ -68,6 +71,15 @@
                      </li>
                      <li class="nav-item active">
                         <asp:LinkButton class="nav-link" ID="ProfileButton" runat="server" Visible="False">Hello user</asp:LinkButton>
+                     </li>
+                      <li class="nav-item active">
+                        <asp:LinkButton class="nav-link" ID="createCourse" runat="server" Visible="False">create courser</asp:LinkButton>
+                     </li>
+                      <li class="nav-item active">
+                        <asp:LinkButton class="nav-link" ID="validateTutor" runat="server" Visible="False">validate tutor</asp:LinkButton>
+                     </li>
+                      <li class="nav-item active">
+                        <asp:LinkButton class="nav-link" ID="validateCourse" runat="server" Visible="False">validate course</asp:LinkButton>
                      </li>
                   </ul>
                </div>

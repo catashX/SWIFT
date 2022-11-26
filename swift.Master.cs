@@ -19,27 +19,66 @@ namespace SWIFT
                     LinkButton2.Visible = true;
 
                     viewCourseButton.Visible = false;
+                    tutorList.Visible = false;
+
                     LogoutButton.Visible = false;
                     ProfileButton.Visible = false;
-                    //ProfileButton.Text = "Hello" + Session["username"].ToString().Trim();
+
+                    validateCourse.Visible = false;
+                    validateTutor.Visible = false;
+
+                    createCourse.Visible = false;
                 }
                 else if (Session["role"].Equals("admin"))
                 {
                     login.Visible = false;
                     LinkButton2.Visible = false;
 
-                    viewCourseButton.Visible = true;
+                    viewCourseButton.Visible = false;
+                    tutorList.Visible = false;
+
                     LogoutButton.Visible = true;
                     ProfileButton.Visible = true;
                     ProfileButton.Text = "Hello" + Session["username"].ToString().Trim();
+
+                    validateCourse.Visible = true;
+                    validateTutor.Visible = true;
+
+                    createCourse.Visible = false;
                 }
                 else if (Session["role"].Equals("member"))
                 {
+                    login.Visible = false;
+                    LinkButton2.Visible = false;
 
+                    viewCourseButton.Visible = true;
+                    tutorList.Visible = true;
+
+                    LogoutButton.Visible = true;
+                    ProfileButton.Visible = true;
+                    ProfileButton.Text = "Hello" + Session["username"].ToString().Trim();
+
+                    validateCourse.Visible = false;
+                    validateTutor.Visible = false;
+
+                    createCourse.Visible = false;
                 }
                 else if (Session["role"].Equals("tutor"))
                 {
+                    login.Visible = false;
+                    LinkButton2.Visible = false;
 
+                    viewCourseButton.Visible = false;
+                    tutorList.Visible = false;
+
+                    LogoutButton.Visible = true;
+                    ProfileButton.Visible = true;
+                    ProfileButton.Text = "Hello" + Session["username"].ToString().Trim();
+
+                    validateCourse.Visible = false;
+                    validateTutor.Visible = false;
+
+                    createCourse.Visible = true;
                 }
                 else
                 {
@@ -47,9 +86,15 @@ namespace SWIFT
                     LinkButton2.Visible = true;
 
                     viewCourseButton.Visible = false;
+                    tutorList.Visible = false;
+
                     LogoutButton.Visible = false;
                     ProfileButton.Visible = false;
-                    //ProfileButton.Text = "Hello" + Session["username"].ToString().Trim();
+
+                    validateCourse.Visible = false;
+                    validateTutor.Visible = false;
+
+                    createCourse.Visible = false;
                 }
             }
             catch(Exception ex)

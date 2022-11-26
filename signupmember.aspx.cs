@@ -76,35 +76,43 @@ namespace SWIFT
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("INSERT INTO member_master_table(member_name,member_email,member_angkatan,member_departemen,member_telepon,member_NIM,member_gender,member_hash,member_salt) values(@memb_name,@memb_mail,@memb_angkatan,@memb_dept,@memb_telepon,@memb_NIM,@memb_gend,@memb_hash,@memb_salt)", con);
-                cmd.Parameters.AddWithValue("@memb_name", namaMember.Text.Trim());
-                cmd.Parameters.AddWithValue("@memb_mail", member_email.Text.Trim());
-                cmd.Parameters.AddWithValue("@memb_angkatan", member_angkatan.Text.Trim());
-                cmd.Parameters.AddWithValue("@memb_dept", member_departemen.Text.Trim());
-                cmd.Parameters.AddWithValue("@memb_telepon", member_telepon.Text.Trim());
-                cmd.Parameters.AddWithValue("@memb_NIM", member_nim.Text.Trim());
-                if (dot_male.Checked)
+                
+                
+                if(member_pass == member_passwordRep)
                 {
-                    cmd.Parameters.AddWithValue("@memb_gend", "male");
-                }
-                else if (dot_female.Checked)
-                {
-                    cmd.Parameters.AddWithValue("memb_gend", "female");
+                    SqlCommand cmd = new SqlCommand("INSERT INTO member_master_table(member_name,member_email,member_angkatan,member_departemen,member_telepon,member_NIM,member_gender,member_hash,member_salt) values(@memb_name,@memb_mail,@memb_angkatan,@memb_dept,@memb_telepon,@memb_NIM,@memb_gend,@memb_hash,@memb_salt)", con);
+                    cmd.Parameters.AddWithValue("@memb_name", namaMember.Text.Trim());
+                    cmd.Parameters.AddWithValue("@memb_mail", member_email.Text.Trim());
+                    cmd.Parameters.AddWithValue("@memb_angkatan", member_angkatan.Text.Trim());
+                    cmd.Parameters.AddWithValue("@memb_dept", member_departemen.Text.Trim());
+                    cmd.Parameters.AddWithValue("@memb_telepon", member_telepon.Text.Trim());
+                    cmd.Parameters.AddWithValue("@memb_NIM", member_nim.Text.Trim());
+                    if (dot_male.Checked)
+                    {
+                        cmd.Parameters.AddWithValue("@memb_gend", "male");
+                    }
+                    else if (dot_female.Checked)
+                    {
+                        cmd.Parameters.AddWithValue("memb_gend", "female");
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@memb_gend", "-");
+                    }
+                    //pass
+                    HashSalt hashsalt = GenerateSaltedHash(64, member_pass.Text.Trim());
+                    cmd.Parameters.AddWithValue("@memb_hash", hashsalt.Hash);
+                    cmd.Parameters.AddWithValue("@memb_salt", hashsalt.Salt);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    Response.Write("<script>alert('Sign Up Successful. Go to User Login to Login');</script>");
+                    Response.Redirect("login.aspx");
                 }
                 else
                 {
-                    cmd.Parameters.AddWithValue("@memb_gend", "-");
+                    con.Close();
+                    Response.Write("<script>alert('try again the password');</script>");
                 }
-                
-                //pass
-                HashSalt hashsalt = GenerateSaltedHash(64,member_pass.Text.Trim());
-                cmd.Parameters.AddWithValue("@memb_hash", hashsalt.Hash);
-                cmd.Parameters.AddWithValue("@memb_salt", hashsalt.Salt);
-
-                cmd.ExecuteNonQuery();
-                con.Close();
-                Response.Write("<script>alert('Sign Up Successful. Go to User Login to Login');</script>");
-                Response.Redirect("login.aspx");
             }
             catch (Exception ex)
             {
