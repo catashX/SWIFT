@@ -28,7 +28,6 @@ namespace SWIFT
             else
             {
                 signUpNewMember();
-                Response.Redirect("login.aspx");
             }
         }
         // user defined method
@@ -81,6 +80,7 @@ namespace SWIFT
                 cmd.ExecuteNonQuery();
                 con.Close();
                 Response.Write("<script>alert('Sign Up Successful. Go to User Login to Login');</script>");
+                Response.Redirect("login.aspx");
             }
             catch (Exception ex)
             {
