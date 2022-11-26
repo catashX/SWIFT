@@ -46,8 +46,7 @@
             <span class="details">Ketik Ulang Password</span>
             <asp:TextBox Cssclass="form-control" ID="member_passwordRep" runat="server" placeholder="password" TextMode="Password"></asp:TextBox>
           </div>
-        </div>
-        <div class="gender-details">
+              <div class="gender-details">
             <asp:RadioButton Groupname="gender" id="dot1" runat="server" />
             <asp:RadioButton Groupname="gender" id="dot2" runat="server" />
           <span class="gender-title">Gender</span>
@@ -65,6 +64,7 @@
             <div class="button">
             <asp:Button ID="RegButtonMember" runat="server" text="Register" OnClick="RegButtonMember_Click" />
             </div>
+        </div>
        </form>
     </div>
   </div>
