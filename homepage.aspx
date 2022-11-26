@@ -128,38 +128,5 @@
             </div>
         </div>
     </section><!-- TEAM -->
-
-    <!-- CONTACT -->
-    <section id="contact">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md-8 mx-auto text-center">
-                    <h6 class="text-primary">KONTAK</h6>
-                    <h1>LAPORKAN</h1>
-                    <p>Jika terjadi kendala ataupun masalah yang terjadi pada sistem, tutor, ataupun member, Anda dapat mengirimkan pesan pada box di bawah ini.</p>
-                </div>
-            </div>
-
-            <form action="" class="row g-3 justify-content-center">
-                <div class="col-md-5">
-                    <input type="text" class="form-control" placeholder="Masukkan Nama Panjang Anda">
-                </div>
-                <div class="col-md-5">
-                    <input type="text" class="form-control" placeholder="Masukkan E-mail">
-                </div>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" placeholder="Masukkan Subjek">
-                </div>
-                <div class="col-md-10">
-                    <textarea name="" id="" cols="30" rows="5" class="form-control"
-                        placeholder="Masukkan Pesan"></textarea>
-                </div>
-                <div class="col-md-10 d-grid">
-                    <button class="btn btn-primary">KIRIM</button>
-                </div>
-            </form>
-
-        </div>
-    </section>
 </asp:Content>
 
