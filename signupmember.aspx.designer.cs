@@ -105,15 +105,6 @@ namespace SWIFT
         protected global::System.Web.UI.WebControls.RadioButton dot1;
 
         /// <summary>
-        /// dot2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton dot2;
-
-        /// <summary>
         /// RegButtonMember control.
         /// </summary>
         /// <remarks>
