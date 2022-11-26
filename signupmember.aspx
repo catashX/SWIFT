@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+     <title>Sign Up</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/signupmemb.css">
+      <link href="css/signupmemb.css" rel="stylesheet" />
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
@@ -46,17 +47,17 @@
             <span class="details">Ketik Ulang Password</span>
             <asp:TextBox Cssclass="form-control" ID="member_passwordRep" runat="server" placeholder="password" TextMode="Password"></asp:TextBox>
           </div>
-              <div class="gender-details">
-            <asp:RadioButton Groupname="gender" id="dot1" runat="server" />
-            <asp:RadioButton Groupname="gender" id="dot2" runat="server" />
+           <div class="gender-details">
+            <asp:RadioButton Groupname="gender" id="dot_male" runat="server" />
+            <asp:RadioButton Groupname="gender" id="dot_female" runat="server" />
           <span class="gender-title">Gender</span>
           <div class="category">
-           <label for="dot1">
-            <span class="dot one"></span>
+           <label for="dot_male">
+            <span class="dot male"></span>
             <span class="gender">Male</span>
           </label>
-          <label for="dot2">
-            <span class="dot two"></span>
+          <label for="dot_female">
+            <span class="dot female"></span>
             <span class="gender">Female</span>
           </label>
           </div>

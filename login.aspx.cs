@@ -43,9 +43,9 @@ namespace SWIFT
                     con.Open();
 
                 }
-                SqlCommand cmd = new SqlCommand("select member_nim,member_hash,member_salt from member_master_table where member_NIM='" + user_nim_login.Text.Trim() + "'", con);
+                SqlCommand cmd = new SqlCommand("select member_nim,member_hash,member_salt,member_name from member_master_table where member_NIM='" + user_nim_login.Text.Trim() + "'", con);
                 SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
+                if (dr.HasRows && user_nim_login.Text.Trim() !=  "")
                 {
                     while (dr.Read())
                     {
@@ -59,6 +59,8 @@ namespace SWIFT
                         {
                             Response.Write("<script>alert('Successful login');</script>");
                             Response.Redirect("CoursePage.aspx");
+                            Session["role"] = "member";
+                            Session["username"] = dr.GetValue(3).ToString();
                         }
                         else
                         {
@@ -82,7 +84,7 @@ namespace SWIFT
         {
             SqlCommand cmd = new SqlCommand("select tutor_nim,tutor_hash,tutor_salt from tutor_master_table where tutor_NIM='" + nim + "'", con);
             SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.HasRows)
+            if (dr.HasRows && user_nim_login.Text.Trim() != "")
             {
                 userLoginData user = new userLoginData();
                 user.hash = dr.GetString(1);
@@ -94,6 +96,8 @@ namespace SWIFT
                 {
                     Response.Write("<script>alert('Successful login');</script>");
                     Response.Redirect("CoursePage.aspx");
+                    Session["role"] = "tutor";
+                    Session["username"] = dr.GetValue(3).ToString();
                 }
                 else
                 {

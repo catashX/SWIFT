@@ -83,11 +83,11 @@ namespace SWIFT
                 cmd.Parameters.AddWithValue("@memb_dept", member_departemen.Text.Trim());
                 cmd.Parameters.AddWithValue("@memb_telepon", member_telepon.Text.Trim());
                 cmd.Parameters.AddWithValue("@memb_NIM", member_nim.Text.Trim());
-                if (dot1.Checked)
+                if (dot_male.Checked)
                 {
                     cmd.Parameters.AddWithValue("@memb_gend", "male");
                 }
-                else if (dot2.Checked)
+                else if (dot_female.Checked)
                 {
                     cmd.Parameters.AddWithValue("memb_gend", "female");
                 }

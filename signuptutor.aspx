@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+      <title>Sign Up</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/signupmemb.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,16 +52,16 @@
           </div>
         </div>
         <div class="gender-details">
-          <input type="radio" name="gender" id="dot1">
-          <input type="radio" name="gender" id="dot2">
+          <input type="radio" name="gender" id="dot_male">
+          <input type="radio" name="gender" id="dot_female">
           <span class="gender-title">Gender</span>
           <div class="category">
-            <label for="dot1">
-            <span class="dot one"></span>
+            <label for="dot_male">
+            <span class="dot male"></span>
             <span class="gender">Male</span>
           </label>
-          <label for="dot2">
-            <span class="dot two"></span>
+          <label for="dot_female">
+            <span class="dot female"></span>
             <span class="gender">Female</span>
           </label>
           </div>

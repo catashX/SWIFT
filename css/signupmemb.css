@@ -90,9 +90,10 @@ form .input-box span.details{
   border: 5px solid transparent;
   transition: all 0.3s ease;
  }
- #dot1:checked ~ .category label .one,
- #dot2:checked ~ .category label .two,
- #dot3:checked ~ .category label .three{
+ 
+ #dot_male:checked ~ .category label .male,
+ #dot_female:checked ~ .category label .female,
+ #dot_3:checked ~ .category label .three{
    background: #9b59b6;
    border-color: #d9d9d9;
  }

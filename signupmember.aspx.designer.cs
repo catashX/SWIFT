@@ -96,22 +96,22 @@ namespace SWIFT
         protected global::System.Web.UI.WebControls.TextBox member_passwordRep;
 
         /// <summary>
-        /// dot1 control.
+        /// dot_male control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton dot1;
+        protected global::System.Web.UI.WebControls.RadioButton dot_male;
 
         /// <summary>
-        /// dot2 control.
+        /// dot_female control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton dot2;
+        protected global::System.Web.UI.WebControls.RadioButton dot_female;
 
         /// <summary>
         /// RegButtonMember control.
