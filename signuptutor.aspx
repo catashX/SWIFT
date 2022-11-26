@@ -51,15 +51,15 @@
           </div>
         </div>
         <div class="gender-details">
-          <input type="radio" name="gender" id="dot-1">
-          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot1">
+          <input type="radio" name="gender" id="dot2">
           <span class="gender-title">Gender</span>
           <div class="category">
-            <label for="dot-1">
+            <label for="dot1">
             <span class="dot one"></span>
             <span class="gender">Male</span>
           </label>
-          <label for="dot-2">
+          <label for="dot2">
             <span class="dot two"></span>
             <span class="gender">Female</span>
           </label>
