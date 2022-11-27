@@ -24,76 +24,85 @@ namespace SWIFT
         protected global::System.Web.UI.HtmlControls.HtmlInputText namaPanjangMember;
 
         /// <summary>
-        /// namaMember control.
+        /// namaTutor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox namaMember;
+        protected global::System.Web.UI.WebControls.TextBox namaTutor;
 
         /// <summary>
-        /// member_nim control.
+        /// tutor_nim control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox member_nim;
+        protected global::System.Web.UI.WebControls.TextBox tutor_nim;
 
         /// <summary>
-        /// member_angkatan control.
+        /// tutor_angkatan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox member_angkatan;
+        protected global::System.Web.UI.WebControls.TextBox tutor_angkatan;
 
         /// <summary>
-        /// member_departemen control.
+        /// tutor_departemen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox member_departemen;
+        protected global::System.Web.UI.WebControls.TextBox tutor_departemen;
 
         /// <summary>
-        /// member_email control.
+        /// tutor_email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox member_email;
+        protected global::System.Web.UI.WebControls.TextBox tutor_email;
 
         /// <summary>
-        /// member_telepon control.
+        /// tutor_telepon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox member_telepon;
+        protected global::System.Web.UI.WebControls.TextBox tutor_telepon;
 
         /// <summary>
-        /// member_pass control.
+        /// tutor_pass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox member_pass;
+        protected global::System.Web.UI.WebControls.TextBox tutor_pass;
 
         /// <summary>
-        /// member_passwordRep control.
+        /// tutor_passwordRep control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox member_passwordRep;
+        protected global::System.Web.UI.WebControls.TextBox tutor_passwordRep;
+
+        /// <summary>
+        /// ktm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload ktm;
 
         /// <summary>
         /// dot_male control.

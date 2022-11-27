@@ -17,39 +17,39 @@
           <div class="input-box">
             <span class="details">Nama Panjang</span>
               <!-- <input type="text" placeholder="Nama" required id="namaPanjangMember" runat="server"> -->
-               <asp:TextBox Cssclass="form-control" ID="namaMember" runat="server" placeholder="Nama"></asp:TextBox>
+               <asp:TextBox Cssclass="form-control" ID="namaTutor" runat="server" placeholder="Nama"></asp:TextBox>
           </div>
           <div class="input-box">
             <span class="details">NIM</span>
-                <asp:TextBox Cssclass="form-control" ID="member_nim" runat="server" placeholder="NIM"></asp:TextBox>
+                <asp:TextBox Cssclass="form-control" ID="tutor_nim" runat="server" placeholder="NIM"></asp:TextBox>
           </div>
           <div class="input-box">
             <span class="details">Angkatan</span>
-            <asp:TextBox Cssclass="form-control" ID="member_angkatan" runat="server" placeholder="angkatan" TextMode="Number"></asp:TextBox>
+            <asp:TextBox Cssclass="form-control" ID="tutor_angkatan" runat="server" placeholder="angkatan" TextMode="Number"></asp:TextBox>
           </div>
           <div class="input-box">
             <span class="details">Departemen</span>
-             <asp:TextBox Cssclass="form-control" ID="member_departemen" runat="server" placeholder="departemen"></asp:TextBox>
+             <asp:TextBox Cssclass="form-control" ID="tutor_departemen" runat="server" placeholder="departemen"></asp:TextBox>
           </div>
           <div class="input-box">
             <span class="details">Email</span>
-             <asp:TextBox Cssclass="form-control" ID="member_email" runat="server" placeholder="email" TextMode="Email"></asp:TextBox>
+             <asp:TextBox Cssclass="form-control" ID="tutor_email" runat="server" placeholder="email" TextMode="Email"></asp:TextBox>
           </div>
           <div class="input-box">
             <span class="details">Nomor Telepon/Whatsapp</span>
-             <asp:TextBox Cssclass="form-control" ID="member_telepon" runat="server" placeholder="telepon" TextMode="Number"></asp:TextBox>
+             <asp:TextBox Cssclass="form-control" ID="tutor_telepon" runat="server" placeholder="telepon" TextMode="Number"></asp:TextBox>
           </div>
           <div class="input-box">
             <span class="details">Password</span>
-            <asp:TextBox Cssclass="form-control" ID="member_pass" runat="server" placeholder="password" TextMode="Password"></asp:TextBox>
+            <asp:TextBox Cssclass="form-control" ID="tutor_pass" runat="server" placeholder="password" TextMode="Password"></asp:TextBox>
           </div>
           <div class="input-box">
             <span class="details">Ketik Ulang Password</span>
-            <asp:TextBox Cssclass="form-control" ID="member_passwordRep" runat="server" placeholder="password" TextMode="Password"></asp:TextBox>
+            <asp:TextBox Cssclass="form-control" ID="tutor_passwordRep" runat="server" placeholder="password" TextMode="Password"></asp:TextBox>
           </div>
             <div class="input-box">
             <span class="details">Upload KTM</span>
-            <asp:FileUpload runat="server"/>
+            <asp:FileUpload id="ktm" runat="server"/>
           </div>
            <div class="gender-details">
             <asp:RadioButton Groupname="gender" id="dot_male" runat="server" />
@@ -67,7 +67,7 @@
           </div>
         </div>
             <div class="button">
-            <asp:Button ID="RegButtonTutor" runat="server" text="Register" />
+            <asp:Button ID="RegButtonTutor" runat="server" text="Register" OnClick="RegButtonTutor_Click" />
             </div>
         </div>
        </form>

@@ -2190,6 +2190,7 @@
     <Content Include="signupmember.aspx" />
     <Content Include="signuptutor.aspx" />
     <Content Include="Web.config" />
+    <Content Include="CourseList.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="adminPage.aspx.cs">
@@ -2248,6 +2249,13 @@
     </Compile>
     <Compile Include="swift.Master.designer.cs">
       <DependentUpon>swift.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CourseList.aspx.cs">
+      <DependentUpon>CourseList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CourseList.aspx.designer.cs">
+      <DependentUpon>CourseList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
