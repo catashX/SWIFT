@@ -2189,6 +2189,8 @@
     <Content Include="loginadmin.aspx" />
     <Content Include="signupmember.aspx" />
     <Content Include="signuptutor.aspx" />
+    <Content Include="verifyTutor.aspx" />
+    <Content Include="viewProfile.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -2248,6 +2250,20 @@
     </Compile>
     <Compile Include="swift.Master.designer.cs">
       <DependentUpon>swift.Master</DependentUpon>
+    </Compile>
+    <Compile Include="verifyTutor.aspx.cs">
+      <DependentUpon>verifyTutor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="verifyTutor.aspx.designer.cs">
+      <DependentUpon>verifyTutor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewProfile.aspx.cs">
+      <DependentUpon>viewProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewProfile.aspx.designer.cs">
+      <DependentUpon>viewProfile.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

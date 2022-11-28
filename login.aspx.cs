@@ -50,8 +50,8 @@ namespace SWIFT
                     while (dr.Read())
                     {
                         userLoginData user = new userLoginData();
-                        user.hash = dr.GetString(1);
-                        user.salt = dr.GetString(2);
+                        user.hash = dr.GetString(1).Trim();
+                        user.salt = dr.GetString(2).Trim();
 
                         bool isPasswordMatched = VerifyPassword(user_pass_login.Text, user.hash, user.salt);
 
@@ -60,19 +60,21 @@ namespace SWIFT
                             Response.Write("<script>alert('Successful login');</script>");
                             Response.Redirect("CoursePage.aspx");
                             Session["role"] = "member";
-                            Session["username"] = dr.GetValue(3).ToString();
+                            Session["username"] = dr.GetValue(3).ToString().Trim();
+                            Session["NIM"] = dr.GetValue(0).ToString().Trim();
                         }
                         else
                         {
                             Response.Write("<script>alert('Login failed, wrong password');</script>");
-                        }
+                        }   
                     }
-                    //Response.Redirect("homepage.aspx");
                 }
                 else
                 {
+                    con.Close();
                     check_tutor(user_nim_login.Text.Trim(), con);
                 }
+                con.Close();
 
             }
             catch (Exception ex)
@@ -82,31 +84,40 @@ namespace SWIFT
         }
         void check_tutor(string nim,SqlConnection con)
         {
-            SqlCommand cmd = new SqlCommand("select tutor_nim,tutor_hash,tutor_salt from tutor_master_table where tutor_NIM='" + nim + "'", con);
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+
+            }
+            SqlCommand cmd = new SqlCommand("select tutor_NIM,tutor_hash,tutor_salt,tutor_name,tutor_verif from tutor_master_table where tutor_verif=1 and tutor_NIM='" + nim + "'", con);
             SqlDataReader dr = cmd.ExecuteReader();
             if (dr.HasRows && user_nim_login.Text.Trim() != "")
             {
-                userLoginData user = new userLoginData();
-                user.hash = dr.GetString(1);
-                user.salt = dr.GetString(2);
-                
-                bool isPasswordMatched = VerifyPassword(user_pass_login.Text, user.hash, user.salt);
+                while (dr.Read())
+                {
+                    userLoginData user = new userLoginData();
+                    user.hash = dr.GetString(1).Trim();
+                    user.salt = dr.GetString(2).Trim();
 
-                if (isPasswordMatched)
-                {
-                    Response.Write("<script>alert('Successful login');</script>");
-                    Response.Redirect("CoursePage.aspx");
-                    Session["role"] = "tutor";
-                    Session["username"] = dr.GetValue(3).ToString();
-                }
-                else
-                {
-                    Response.Write("<script>alert('Login failed, wrong password');</script>");
+                    bool isPasswordMatched = VerifyPassword(user_pass_login.Text, user.hash, user.salt);
+
+                    if (isPasswordMatched)
+                    {
+                        Response.Write("<script>alert('Successful login');</script>");
+                        Session["role"] = "tutor";
+                        Session["username"] = dr.GetValue(3).ToString().Trim();
+                        Session["NIM"] = dr.GetValue(0).ToString().Trim();
+                        Response.Redirect("CoursePage.aspx");
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('Login failed, wrong password');</script>");
+                    }
                 }
             }
             else
             {
-                Response.Write("<script>alert('Invalid credentials');</script>");
+                Response.Write("<script>alert('Invalid credentials or your account is not verified yet');</script>");
             }
         }
     }

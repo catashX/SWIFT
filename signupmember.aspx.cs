@@ -78,7 +78,7 @@ namespace SWIFT
                 }
                 
                 
-                if(member_pass == member_passwordRep)
+                if(member_pass.Text.Trim() == member_passwordRep.Text.Trim())
                 {
                     SqlCommand cmd = new SqlCommand("INSERT INTO member_master_table(member_name,member_email,member_angkatan,member_departemen,member_telepon,member_NIM,member_gender,member_hash,member_salt) values(@memb_name,@memb_mail,@memb_angkatan,@memb_dept,@memb_telepon,@memb_NIM,@memb_gend,@memb_hash,@memb_salt)", con);
                     cmd.Parameters.AddWithValue("@memb_name", namaMember.Text.Trim());

@@ -66,20 +66,20 @@
                      <li class="nav-item active">
                         <asp:LinkButton class="nav-link" ID="LinkButton2" runat="server">Sign Up</asp:LinkButton>
                      </li>
+                      <li class="nav-item active">
+                        <asp:LinkButton class="nav-link" ID="createCourse" runat="server" Visible="False">create course</asp:LinkButton>
+                     </li>
+                      <li class="nav-item active">
+                        <asp:LinkButton class="nav-link" ID="validateTutor" runat="server" Visible="False" OnClick="toVerifyTutor">validate tutor</asp:LinkButton>
+                     </li>
+                      <li class="nav-item active">
+                        <asp:LinkButton class="nav-link" ID="validateCourse" runat="server" Visible="False">validate course</asp:LinkButton>
+                     </li>
                      <li class="nav-item active">
                         <asp:LinkButton class="nav-link" ID="LogoutButton" runat="server" Visible="False">Logout</asp:LinkButton>
                      </li>
                      <li class="nav-item active">
-                        <asp:LinkButton class="nav-link" ID="ProfileButton" runat="server" Visible="False">Hello user</asp:LinkButton>
-                     </li>
-                      <li class="nav-item active">
-                        <asp:LinkButton class="nav-link" ID="createCourse" runat="server" Visible="False">create courser</asp:LinkButton>
-                     </li>
-                      <li class="nav-item active">
-                        <asp:LinkButton class="nav-link" ID="validateTutor" runat="server" Visible="False">validate tutor</asp:LinkButton>
-                     </li>
-                      <li class="nav-item active">
-                        <asp:LinkButton class="nav-link" ID="validateCourse" runat="server" Visible="False">validate course</asp:LinkButton>
+                        <asp:LinkButton class="nav-link" ID="ProfileButton" runat="server" Visible="False" OnClick="viewProfile">Hello user</asp:LinkButton>
                      </li>
                   </ul>
                </div>

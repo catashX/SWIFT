@@ -39,7 +39,8 @@ namespace SWIFT
 
                     LogoutButton.Visible = true;
                     ProfileButton.Visible = true;
-                    ProfileButton.Text = "Hello" + Session["username"].ToString().Trim();
+                    ProfileButton.Text = "Hello " + Session["username"].ToString().Trim();
+                    ProfileButton.Enabled = false;
 
                     validateCourse.Visible = true;
                     validateTutor.Visible = true;
@@ -56,7 +57,8 @@ namespace SWIFT
 
                     LogoutButton.Visible = true;
                     ProfileButton.Visible = true;
-                    ProfileButton.Text = "Hello" + Session["username"].ToString().Trim();
+                    ProfileButton.Text = "Hello " + Session["username"].ToString().Trim();
+                    ProfileButton.Enabled = true;
 
                     validateCourse.Visible = false;
                     validateTutor.Visible = false;
@@ -73,7 +75,8 @@ namespace SWIFT
 
                     LogoutButton.Visible = true;
                     ProfileButton.Visible = true;
-                    ProfileButton.Text = "Hello" + Session["username"].ToString().Trim();
+                    ProfileButton.Text = "Hello " + Session["username"].ToString().Trim();
+                    ProfileButton.Enabled = true;
 
                     validateCourse.Visible = false;
                     validateTutor.Visible = false;
@@ -112,6 +115,16 @@ namespace SWIFT
         protected void LinkButton10_Click1(object sender, EventArgs e)
         {
             Response.Redirect("signuptutor.aspx");
+        }
+
+        protected void toVerifyTutor(object sender, EventArgs e)
+        {
+            Response.Redirect("verifyTutor.aspx");
+        }
+
+        protected void viewProfile(object sender, EventArgs e)
+        {
+            Response.Redirect("viewProfile.aspx");
         }
     }
 

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace SWIFT
 {
@@ -30,7 +31,7 @@ namespace SWIFT
             if (checkTutorExists())
             {
 
-                Response.Write("<script>alert('Tutor Already Exist with this Member ID, try other ID');</script>");
+                Response.Write("<script>alert('Tutor Already Exist with this tutor ID, try other ID');</script>");
             }
             else
             {
@@ -77,23 +78,38 @@ namespace SWIFT
                     con.Open();
                 }
 
-
-                if (tutor_pass == tutor_passwordRep)
+                if (tutor_pass.Text.Trim() == tutor_passwordRep.Text.Trim())
                 {
-                    SqlCommand cmd = new SqlCommand("INSERT INTO tutor_master_table(tutor_name,tutor_email,tutor_angkatan,tutor_departemen,tutor_telepon,tutor_NIM,tutor_gender,tutor_hash,tutor_salt) values(@tut_name,@tut_mail,@tut_angkatan,@tut_dept,@tut_telepon,@tut_NIM,@tut_gend,@tut_hash,@tut_salt)", con);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO tutor_master_table(tutor_name,tutor_email,tutor_angkatan,tutor_departemen,tutor_telepon,tutor_NIM,tutor_gender,tutor_hash,tutor_salt,tutor_verif,tutor_fotoKTM)values(@tut_name,@tut_mail,@tut_angkatan,@tut_dept,@tut_telepon,@tut_NIM,@tut_gend,@tut_hash,@tut_salt,@verified,@Data)", con);
                     cmd.Parameters.AddWithValue("@tut_name", namaTutor.Text.Trim());
                     cmd.Parameters.AddWithValue("@tut_mail", tutor_email.Text.Trim());
                     cmd.Parameters.AddWithValue("@tut_angkatan", tutor_angkatan.Text.Trim());
                     cmd.Parameters.AddWithValue("@tut_dept", tutor_departemen.Text.Trim());
                     cmd.Parameters.AddWithValue("@tut_telepon", tutor_telepon.Text.Trim());
                     cmd.Parameters.AddWithValue("@tut_NIM", tutor_nim.Text.Trim());
+                    cmd.Parameters.AddWithValue("@verified", 0);
+                    //cmd.Parameters.AddWithValue("@Name", Path.GetFileName(ktm.PostedFile.FileName));
+                    //cmd.Parameters.AddWithValue("@ContentType", ktm.PostedFile.ContentType);
+                    byte[] img_bytes;
+                    if (ktm.HasFile || ktm.HasFiles)
+                    {
+                        using (BinaryReader br = new BinaryReader(ktm.PostedFile.InputStream))
+                        {
+                            img_bytes = br.ReadBytes(ktm.PostedFile.ContentLength);
+                        }
+                        cmd.Parameters.AddWithValue("@Data", img_bytes);
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('input ktm!');</script>");
+                    }
                     if (dot_male.Checked)
                     {
                         cmd.Parameters.AddWithValue("@tut_gend", "male");
                     }
                     else if (dot_female.Checked)
                     {
-                        cmd.Parameters.AddWithValue("tut_gend", "female");
+                        cmd.Parameters.AddWithValue("@tut_gend", "female");
                     }
                     else
                     {

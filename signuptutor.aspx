@@ -12,7 +12,7 @@
   <div class="container">
     <div class="title">Pendaftaran Tutor</div>
     <div class="content">
-      <form action="signupmember.aspx" runat="server">
+      <form action="signuptutor.aspx" runat="server">
         <div class="user-details">
           <div class="input-box">
             <span class="details">Nama Panjang</span>
