@@ -66,7 +66,7 @@
                      <div class="col-md-5">
                         <label>Angkatan</label>
                         <div class="form-group">
-                           <asp:TextBox CssClass="form-control" ID="angkatanUser" runat="server" placeholder="Angkatan" ></asp:TextBox>
+                           <asp:TextBox CssClass="form-control" ID="angkatanUser" runat="server" placeholder="Angkatan" TextMode="Number"></asp:TextBox>
                         </div>
                      </div>    
                   </div>
@@ -80,7 +80,7 @@
                      <div class="col-md-5">
                         <label>No Telepon</label>
                         <div class="form-group">
-                           <asp:TextBox CssClass="form-control" ID="teleponUser" runat="server" placeholder="No Telepon" ></asp:TextBox>
+                           <asp:TextBox CssClass="form-control" ID="teleponUser" runat="server" placeholder="No Telepon" TextMode="Number"></asp:TextBox>
                         </div>
                      </div>
                   </div>

@@ -15,44 +15,62 @@ namespace SWIFT
     public partial class viewProfile : System.Web.UI.Page
     {
 
-        public class userData
+        public class userDatas
         {
             public string nim { get; set; }
-            public string hash { get; set; }
-            public string salt { get; set; }
+            public string Hash { get; set; }
+            public string Salt { get; set; }
+        }
+        public class HashSalt
+        {
+            public string Hash { get; set; }
+            public string Salt { get; set; }
         }
 
-        userData user = new userData();
+        userDatas user = new userDatas();
+
+        string oldHash;
+        string oldSalt;
         string strcon = ConfigurationManager.ConnectionStrings["swiftDB"].ConnectionString;
         public static bool VerifyPassword(string enteredPassword, string storedHash, string storedSalt)
         {
             var saltBytes = Convert.FromBase64String(storedSalt);
             var rfc2898DeriveBytes = new Rfc2898DeriveBytes(enteredPassword, saltBytes, 10000);
-            return Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256)) == storedHash;
+            return (Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256)) == storedHash);
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["role"] == null)
+            try
             {
-                Response.Write("<script>alert('login first!');</script>");
-                Response.Redirect("login.aspx");
+                if (!Page.IsPostBack)
+                {
+                    if (Session["role"] == null || Session["role"].Equals(""))
+                    {
+                        Response.Write("<script>alert('login first!');</script>");
+                        Response.Redirect("login.aspx");
+                    }
+                    else if (Session["role"].Equals("member"))
+                    {
+                        showProfileMember();
+                        descBox.Visible = false;
+                    }
+                    else if (Session["role"].Equals("tutor"))
+                    {
+                        showProfileTutor();
+                        descBox.Visible = true;
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('login first!');</script>");
+                        Response.Redirect("login.aspx");
+                    }
+                }
             }
-            else if(Session["role"].Equals("member"))
+            catch(Exception ex)
             {
-                showProfileMember();
-                descBox.Visible = false;
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
-            else if (Session["role"].Equals("tutor"))
-            {
-                showProfileTutor();
-                descBox.Visible = true;
-            }
-            else
-            {
-                Response.Write("<script>alert('login first!');</script>");
-                Response.Redirect("login.aspx");
-            }
-            
         }
 
         void showProfileMember()
@@ -71,22 +89,23 @@ namespace SWIFT
                 {
                     NamaUser.Text = dr.GetValue(0).ToString().Trim();
                     emailUser.Text = dr.GetValue(1).ToString().Trim();
-                    angkatanUser.Text = dr.GetString(2).Trim();
-                    deptUser.Text = dr.GetString(3).Trim();
-                    teleponUser.Text = dr.GetString(4).Trim();
-                    NIMUser.Text = dr.GetString(5).Trim();
-                    genderUser.Text = dr.GetString(8).Trim();
-                    descBox.Text = dr.GetString(7).Trim();
+                    angkatanUser.Text = dr.GetValue(2).ToString().Trim();
+                    deptUser.Text = dr.GetValue(3).ToString().Trim();
+                    teleponUser.Text = dr.GetValue(4).ToString().Trim();
+                    NIMUser.Text = Session["NIM"].ToString().Trim();
+                    genderUser.Text = dr.GetValue(8).ToString().Trim();
+                    descBox.Text = dr.GetValue(7).ToString().Trim();
 
-                    
+                    oldHash = dr["member_hash"].ToString().Trim();
+                    oldSalt = dr["member_salt"].ToString().Trim();
 
-                    if (dr.GetSqlBinary(5) == null)
+                    if (Convert.ToBase64String((byte[])dr["member"]) == null)
                     {
                         picUser.ImageUrl = "imgs/generaluser.png";
                     }
                     else
                     {
-                        string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr.GetSqlBinary(5));
+                        string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["member_pic"]);
                         picUser.ImageUrl = imageUrl;
                     }
                 }
@@ -103,6 +122,7 @@ namespace SWIFT
         {
             try
             {
+
                 SqlConnection con = new SqlConnection(strcon);
                 if (con.State == ConnectionState.Closed)
                 {
@@ -120,8 +140,11 @@ namespace SWIFT
                     NIMUser.Text = Session["NIM"].ToString().Trim();
                     genderUser.Text = dr.GetValue(13).ToString().Trim();
 
-                    user.hash = dr.GetValue(10).ToString().Trim();
-                    user.salt = dr.GetValue(11).ToString().Trim();
+
+                    oldHash = dr["tutor_hash"].ToString().Trim();
+                    oldSalt = dr["tutor_salt"].ToString().Trim();
+
+                    //user = new HashSalt { Hash = dr["tutor_hash"].ToString().Trim(), Salt = dr["tutor_salt"].ToString().Trim()};
 
                     if (Convert.ToBase64String((byte[])dr["tutor_foto"]) == null)
                     {
@@ -143,20 +166,34 @@ namespace SWIFT
 
         protected void updateBtn_Click(object sender, EventArgs e)
         {
-            if (Session["role"].Equals("member"))
+            try
             {
-                showProfileMember();
-                Response.Redirect(Request.RawUrl);
+                
+                if (Session["role"] == null || Session["role"].Equals(""))
+                {
+                    Response.Write("<script>alert('login first!');</script>");
+                    Response.Redirect("login.aspx");
+                }
+                else if (Session["role"].Equals("member"))
+                {
+                    updateProfileMember();
+                    //Response.Redirect(Request.RawUrl);
+                }
+                else if (Session["role"].Equals("tutor"))
+                {
+                    //Response.Write("<script>alert('terpencet tutor');</script>");
+                    updateProfileTutor();
+                    //Response.Redirect(Request.RawUrl);
+                }
+                else
+                {
+                    Response.Write("<script>alert('login first!');</script>");
+                    Response.Redirect("login.aspx");
+                }
             }
-            else if (Session["role"].Equals("tutor"))
+            catch (Exception ex)
             {
-                updateProfileTutor();
-                Response.Redirect(Request.RawUrl);
-            }
-            else
-            {
-                Response.Write("<script>alert('login first!');</script>");
-                Response.Redirect("login.aspx");
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
         }
 
@@ -164,21 +201,53 @@ namespace SWIFT
         {
             try
             {
-                bool isPaswordMatched = VerifyPassword(oldPass.Text.Trim(), user.hash, user.salt);
+                //Response.Write("<script>alert('trying');</script>");
                 SqlConnection con = new SqlConnection(strcon);
                 if (con.State == ConnectionState.Closed)
                 {
+                    //Response.Write("<script>alert('buka');</script>");
                     con.Open();
                 }
-                if ( isPaswordMatched )
+                else
                 {
-                    SqlCommand cmd = new SqlCommand("UPDATE member_master_table(member_name,member_email,member_angkatan,member_departemen,member_telepon,member_NIM,member_gender,member_hash,member_salt) values(@memb_name,@memb_mail,@memb_angkatan,@memb_dept,@memb_telepon,@memb_NIM,@memb_gend,@memb_hash,@memb_salt)", con);
-                    cmd.Parameters.AddWithValue("@memb_name", namaMember.Text.Trim());
-                    cmd.Parameters.AddWithValue("@memb_mail", member_email.Text.Trim());
-                    cmd.Parameters.AddWithValue("@memb_angkatan", member_angkatan.Text.Trim());
-                    cmd.Parameters.AddWithValue("@memb_dept", member_departemen.Text.Trim());
-                    cmd.Parameters.AddWithValue("@memb_telepon", member_telepon.Text.Trim());
-                    cmd.Parameters.AddWithValue("@memb_NIM", member_nim.Text.Trim());
+                    //Response.Write("<script>alert('con state');</script>");
+                }
+                SqlCommand cmd = new SqlCommand("SELECT member_hash, member_salt,member_pic from member_master_table where member_NIM ='" + NIMUser.Text.ToString().Trim() + "';", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    oldHash = dr["member_hash"].ToString().Trim();
+                    oldSalt = dr["member_salt"].ToString().Trim();
+                }
+                con.Close();
+                bool isPaswordMatched = VerifyPassword(oldPass.Text.ToString().Trim(), oldHash.ToString().Trim(), oldSalt.ToString().Trim());
+                if (con.State == ConnectionState.Closed)
+                {
+                    //Response.Write("<script>alert('buka');</script>");
+                    con.Open();
+                }
+                else
+                {
+                    //Response.Write("<script>alert('con state');</script>");
+                }
+                if (isPaswordMatched)
+                {
+                    //Response.Write("<script>alert('passBener');</script>");
+                    SqlCommand cmd2 = new SqlCommand("UPDATE member_master_table set member_name=@tutr_name," +
+                        "member_email=@tutr_mail," +
+                        "member_angkatan=@tutr_angkatan," +
+                        "member_departemen=@tutr_dept," +
+                        "member_telepon=@tutr_telepon," +
+                        "member_hash=@tutr_hash," +
+                        "member_salt=@tutr_salt," +
+                        "member_deskripsi=@tDesc WHERE member_NIM='" + NIMUser.Text.Trim() + "';", con);
+
+                    cmd2.Parameters.AddWithValue("@tutr_name", NamaUser.Text.Trim());
+                    cmd2.Parameters.AddWithValue("@tutr_mail", emailUser.Text.Trim());
+                    cmd2.Parameters.AddWithValue("@tutr_angkatan", angkatanUser.Text.Trim());
+                    cmd2.Parameters.AddWithValue("@tutr_dept", deptUser.Text.Trim());
+                    cmd2.Parameters.AddWithValue("@tutr_telepon", teleponUser.Text.Trim());
+                    cmd2.Parameters.AddWithValue("@tDesc", descBox.Text.Trim());
 
                     //pass
                     byte[] img_bytes;
@@ -188,26 +257,144 @@ namespace SWIFT
                         {
                             img_bytes = br.ReadBytes(tutorPIC.PostedFile.ContentLength);
                         }
-                        cmd.Parameters.AddWithValue("@Data", img_bytes);
+                        string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String(img_bytes);
+                        picUser.ImageUrl = imageUrl;
+                        SqlCommand cmd3 = new SqlCommand("UPDATE member_master_table set member_pic=@Data where member_NIM ='" + NIMUser.Text.Trim() + "';", con);
+                        cmd3.Parameters.AddWithValue("@Data", img_bytes);
+                        cmd3.ExecuteNonQuery();
                     }
-
+                    if (newPass.Text == null || newPass.Text == "")
+                    {
+                        cmd2.Parameters.AddWithValue("@member_hash", user.Hash);
+                        cmd2.Parameters.AddWithValue("@member_salt", user.Salt);
+                    }
+                    else
+                    {
+                        HashSalt newpass = GenerateSaltedHash(64, newPass.Text);
+                        cmd2.Parameters.AddWithValue("@member_hash", newpass.Hash);
+                        cmd2.Parameters.AddWithValue("@member_salt", newpass.Salt);
+                    }
+                    cmd2.ExecuteNonQuery();
+                    con.Close();
+                    Response.Write("<script>alert('update success');</script>");
                 }
                 else
                 {
                     con.Close();
                     Response.Write("<script>alert('try again the password');</script>");
                 }
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
         }
 
         void updateProfileTutor()
         {
+            //Response.Write("<script>alert('updating');</script>");
+            try
+            {
+                //Response.Write("<script>alert('trying');</script>");
+                SqlConnection con = new SqlConnection(strcon);
+                if (con.State == ConnectionState.Closed)
+                {
+                    //Response.Write("<script>alert('buka');</script>");
+                    con.Open();
+                }
+                else
+                {
+                    //Response.Write("<script>alert('con state');</script>");
+                }
+                SqlCommand cmd = new SqlCommand("SELECT tutor_hash, tutor_salt,tutor_foto from tutor_master_table where tutor_NIM ='"+ NIMUser.Text.ToString().Trim() +"';", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    oldHash = dr["tutor_hash"].ToString().Trim();
+                    oldSalt = dr["tutor_salt"].ToString().Trim();
+                }
+                con.Close();
+                bool isPaswordMatched = VerifyPassword(oldPass.Text.ToString().Trim(), oldHash.ToString().Trim(), oldSalt.ToString().Trim());
+                if (con.State == ConnectionState.Closed)
+                {
+                    //Response.Write("<script>alert('buka');</script>");
+                    con.Open();
+                }
+                else
+                {
+                    //Response.Write("<script>alert('con state');</script>");
+                }
+                if (isPaswordMatched)
+                {
+                    //Response.Write("<script>alert('passBener');</script>");
+                    SqlCommand cmd2 = new SqlCommand("UPDATE tutor_master_table set tutor_name=@tutr_name," +
+                        "tutor_email=@tutr_mail," +
+                        "tutor_angkatan=@tutr_angkatan," +
+                        "tutor_departemen=@tutr_dept," +
+                        "tutor_telepon=@tutr_telepon," +
+                        "tutor_hash=@tutr_hash," +
+                        "tutor_salt=@tutr_salt," +
+                        "tutor_deskripsi=@tDesc WHERE tutor_NIM='"+NIMUser.Text.Trim()+"';", con);
 
+                        cmd2.Parameters.AddWithValue("@tutr_name", NamaUser.Text.Trim());
+                        cmd2.Parameters.AddWithValue("@tutr_mail", emailUser.Text.Trim());
+                        cmd2.Parameters.AddWithValue("@tutr_angkatan", angkatanUser.Text.Trim());
+                        cmd2.Parameters.AddWithValue("@tutr_dept", deptUser.Text.Trim());
+                        cmd2.Parameters.AddWithValue("@tutr_telepon", teleponUser.Text.Trim());
+                        cmd2.Parameters.AddWithValue("@tDesc", descBox.Text.Trim());
+
+                    //pass
+                    byte[] img_bytes;
+                    if (tutorPIC.HasFile || tutorPIC.HasFiles)
+                    {
+                        using (BinaryReader br = new BinaryReader(tutorPIC.PostedFile.InputStream))
+                        {
+                            img_bytes = br.ReadBytes(tutorPIC.PostedFile.ContentLength);
+                        }
+                        string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String(img_bytes);
+                        picUser.ImageUrl = imageUrl;
+                        SqlCommand cmd3 = new SqlCommand("UPDATE tutor_master_table set tutor_foto=@Data where tutor_NIM ='" + NIMUser.Text.Trim() + "';", con);
+                        cmd3.Parameters.AddWithValue("@Data", img_bytes);
+                        cmd3.ExecuteNonQuery();
+                    }
+                    if (newPass.Text == null || newPass.Text == "")
+                    {
+                        cmd2.Parameters.AddWithValue("@tutr_hash", user.Hash);
+                        cmd2.Parameters.AddWithValue("@tutr_salt", user.Salt);
+                    }
+                    else
+                    {
+                        HashSalt newpass = GenerateSaltedHash(64, newPass.Text);
+                        cmd2.Parameters.AddWithValue("@tutr_hash", newpass.Hash);
+                        cmd2.Parameters.AddWithValue("@tutr_salt", newpass.Salt);
+                    }
+                    cmd2.ExecuteNonQuery();
+                    con.Close();
+                    Response.Write("<script>alert('update success');</script>");
+                }
+                else
+                {
+                    con.Close();
+                    Response.Write("<script>alert('try again the password');</script>");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+            }
+        }
+
+        public static HashSalt GenerateSaltedHash(int size, string password)
+        {
+            var saltBytes = new byte[size];
+            var provider = new RNGCryptoServiceProvider();
+            provider.GetNonZeroBytes(saltBytes);
+            var salt = Convert.ToBase64String(saltBytes);
+            var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, saltBytes, 10000);
+            var hashPassword = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
+
+            HashSalt hashSalt = new HashSalt { Hash = hashPassword, Salt = salt };
+            return hashSalt;
         }
     }
 }

@@ -9,8 +9,10 @@
                 <div class="col-lg-7 mx-auto text-center">
                     <h1 class="display-4 text-white"><img class="logo" src="img/logoerase3.png" alt="" style="width: 250px;"></h1>
                     <p class="text-white my-3">SWIFT (Study With Your Favorite Tutor) merupakan website untuk memfasilitasi mahasiswa PKU IPB University yang sedang mencari tutor, juga mahasiswa semester 3 ke atas yang ingin mencari pekerjaan sampingan sebagai seorang tutor.</p>
-                    <a href="login.aspx" class="btn btn-outline-light">Log In</a>
-                    <a href="signupmember.aspx" class="btn btn-outline-light">Sign Up</a>
+                    <asp:Button ID="to_login" CssClass="btn btn-outline-light" Text="Log-in" runat="server" OnClick="to_login_Click" />
+                    <asp:Button ID="to_signup" CssClass="btn btn-outline-light" Text="Sign-up" runat="server" OnClick="to_signup_Click" />
+                    <!--<a href="login.aspx" class="btn btn-outline-light">Log In</a>
+                    //<a href="signupmember.aspx" class="btn btn-outline-light">Sign Up</a>-->
                 </div>
             </div>
         </div>

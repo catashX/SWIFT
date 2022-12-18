@@ -19,7 +19,6 @@ namespace SWIFT
                     LinkButton2.Visible = true;
 
                     viewCourseButton.Visible = false;
-                    tutorList.Visible = false;
 
                     LogoutButton.Visible = false;
                     ProfileButton.Visible = false;
@@ -35,7 +34,6 @@ namespace SWIFT
                     LinkButton2.Visible = false;
 
                     viewCourseButton.Visible = false;
-                    tutorList.Visible = false;
 
                     LogoutButton.Visible = true;
                     ProfileButton.Visible = true;
@@ -53,7 +51,6 @@ namespace SWIFT
                     LinkButton2.Visible = false;
 
                     viewCourseButton.Visible = true;
-                    tutorList.Visible = true;
 
                     LogoutButton.Visible = true;
                     ProfileButton.Visible = true;
@@ -71,7 +68,6 @@ namespace SWIFT
                     LinkButton2.Visible = false;
 
                     viewCourseButton.Visible = false;
-                    tutorList.Visible = false;
 
                     LogoutButton.Visible = true;
                     ProfileButton.Visible = true;
@@ -89,7 +85,6 @@ namespace SWIFT
                     LinkButton2.Visible = true;
 
                     viewCourseButton.Visible = false;
-                    tutorList.Visible = false;
 
                     LogoutButton.Visible = false;
                     ProfileButton.Visible = false;
@@ -102,7 +97,7 @@ namespace SWIFT
             }
             catch(Exception ex)
             {
-
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
             
         }
@@ -125,6 +120,44 @@ namespace SWIFT
         protected void viewProfile(object sender, EventArgs e)
         {
             Response.Redirect("viewProfile.aspx");
+        }
+
+        protected void Logout(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Session.Clear();
+            Response.Cookies.Clear();
+            Response.Redirect("homepage.aspx");
+        }
+
+        protected void tutManagement(object sender, EventArgs e)
+        {
+            Response.Redirect("verifyTutor.aspx");
+        }
+
+        protected void courseList(object sender, EventArgs e)
+        {
+            Response.Redirect("CoursePage.aspx");
+        }
+
+        protected void usLogin(object sender, EventArgs e)
+        {
+            Response.Redirect("login.aspx");
+        }
+
+        protected void signUp(object sender, EventArgs e)
+        {
+            Response.Redirect("signupmember.aspx");
+        }
+
+        protected void createCourses(object sender, EventArgs e)
+        {
+            Response.Redirect("createCourse.aspx");
+        }
+
+        protected void validateS(object sender, EventArgs e)
+        {
+            Response.Redirect("adminPage.aspx");
         }
     }
 

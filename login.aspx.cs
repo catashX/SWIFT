@@ -107,7 +107,7 @@ namespace SWIFT
                         Session["role"] = "tutor";
                         Session["username"] = dr.GetValue(3).ToString().Trim();
                         Session["NIM"] = dr.GetValue(0).ToString().Trim();
-                        Response.Redirect("CoursePage.aspx");
+                        Response.Redirect("createCourse.aspx");
                     }
                     else
                     {

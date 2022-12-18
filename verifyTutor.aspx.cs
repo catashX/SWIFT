@@ -17,6 +17,10 @@ namespace SWIFT
         string strcon = ConfigurationManager.ConnectionStrings["swiftDB"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["role"] == null)
+            {
+                Response.Redirect("homepage.aspx");
+            }
             if (!IsPostBack)
             {
                 tutorVerifGrid.DataBind();
